@@ -1,5 +1,3 @@
-Great question! Let’s go **step-by-step** through the process of **reducing redundancy** in a relational database through **normalization**, focusing on:
-
 - 1NF (First Normal Form)
 - 2NF (Second Normal Form)
 - 3NF (Third Normal Form)
@@ -157,7 +155,3 @@ Split into two tables:
 | 3NF         | Transitive dependencies   | Split out dependent non-key data |
 | BCNF        | Candidate key issues      | Redesign relationships           |
 | 4NF         | Multi-valued dependencies | Further decomposition            |
-
----
-
-Let me know if you want real SQL table examples or a visual diagram of this!
