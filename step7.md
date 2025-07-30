@@ -1,219 +1,212 @@
-# 🧩 **STEP 6: JOINs and SET Operations**
+# 🧠 **STEP 7: Advanced Query Techniques**
 
-Understanding JOINs is essential for working with **normalized databases**. You’ll use joins anytime you work with multiple related tables.
+## Subqueries, CTEs, Derived Tables, and Advanced Filtering
 
----
-
-## 🔷 PART 1: JOINS — Combining Data from Multiple Tables
+These techniques give you **modular**, **composable**, and **powerful** query logic.
 
 ---
 
-### 🔹 1. INNER JOIN (default join)
+squence
 
-Returns only rows that have **matching values in both tables**.
+## 🔹 1. **Subqueries (Nested Queries)**
+
+A subquery is a query **inside** another query.
+
+### 🧾 Types of Subqueries
+
+---
+
+### ✅ **Scalar Subquery** (returns single value)
 
 ```sql
-SELECT users.name, orders.total
+SELECT name,
+  (SELECT COUNT(*) FROM orders o WHERE o.user_id = u.id) AS order_count
+FROM users u;
+```
+
+> For each user, count how many orders they placed.
+
+---
+
+### ✅ **Column Subquery** (returns one column)
+
+```sql
+SELECT name
 FROM users
-INNER JOIN orders ON users.id = orders.user_id;
+WHERE id IN (SELECT user_id FROM orders);
 ```
 
-> ✅ This returns only users who **have orders**.
+> Users who placed orders.
 
 ---
 
-### 🔹 2. LEFT JOIN (LEFT OUTER JOIN)
-
-Returns **all rows from the left table**, and matching rows from the right. If there's no match, returns `NULL` for right side.
+### ✅ **Row Subquery** (multiple columns)
 
 ```sql
-SELECT users.name, orders.total
-FROM users
-LEFT JOIN orders ON users.id = orders.user_id;
+SELECT * FROM products
+WHERE (category_id, price) =
+  (SELECT category_id, MAX(price) FROM products);
 ```
 
-> ✅ Useful for: "All users, even if they have no orders"
+> Most expensive product in a category.
 
 ---
 
-### 🔹 3. RIGHT JOIN (RIGHT OUTER JOIN)
+### ✅ **Correlated Subquery**
 
-Same as `LEFT JOIN`, but reversed.
-
-```sql
-SELECT users.name, orders.total
-FROM users
-RIGHT JOIN orders ON users.id = orders.user_id;
-```
-
-> ✅ Not used often — you can usually flip table order and use `LEFT JOIN`.
-
----
-
-### 🔹 4. FULL OUTER JOIN
-
-Returns **all rows** from both tables. Where no match exists, returns `NULL`.
+References data from outer query — re-evaluated for each row.
 
 ```sql
-SELECT users.name, orders.total
-FROM users
-FULL OUTER JOIN orders ON users.id = orders.user_id;
-```
-
-> 🔴 Not supported in all SQL dialects (e.g., MySQL). Use `UNION` workaround.
-
----
-
-### 🔹 5. CROSS JOIN
-
-Returns the **Cartesian product** of the two tables (every row with every other row).
-
-```sql
-SELECT a.name, b.name
-FROM students a
-CROSS JOIN teachers b;
-```
-
-> ⚠️ Usually avoided unless generating combinations.
-
----
-
-### 🔹 6. SELF JOIN
-
-A table joined to itself.
-
-```sql
-SELECT e1.name AS employee, e2.name AS manager
-FROM employees e1
-LEFT JOIN employees e2 ON e1.manager_id = e2.id;
-```
-
----
-
-### 🔹 7. USING vs ON
-
-If both tables have a column with the same name:
-
-```sql
--- Same as ON users.id = orders.user_id
-SELECT * FROM users JOIN orders USING (id);
-```
-
-But `USING` only works when the column name is identical in both tables.
-
----
-
-### 🔹 Real-World Example
-
-Schema:
-
-- `users(id, name)`
-- `orders(id, user_id, total)`
-- `products(id, name)`
-- `order_items(id, order_id, product_id, quantity)`
-
-✅ Total amount per user:
-
-```sql
-SELECT u.name, SUM(o.total) AS total_spent
+SELECT name
 FROM users u
-JOIN orders o ON u.id = o.user_id
-GROUP BY u.name;
+WHERE EXISTS (
+  SELECT 1 FROM orders o WHERE o.user_id = u.id
+);
 ```
 
-✅ Products in each order:
+> Returns users **only if they have orders**.
+
+---
+
+## ⚠️ Common Subquery Mistakes
+
+- ❌ Using `=` with subquery returning multiple rows
+- ❌ Using correlated subqueries where a `JOIN` is better (performance hit)
+
+---
+
+## 🔹 2. **Derived Tables (Inline Views)**
+
+Use a subquery **as a table** in the `FROM` clause.
 
 ```sql
-SELECT o.id AS order_id, p.name AS product, oi.quantity
-FROM orders o
-JOIN order_items oi ON o.id = oi.order_id
-JOIN products p ON oi.product_id = p.id;
+SELECT category, avg_price
+FROM (
+  SELECT category, AVG(price) AS avg_price
+  FROM products
+  GROUP BY category
+) AS category_avg
+WHERE avg_price > 100;
 ```
 
----
-
-## 🔷 PART 2: SET OPERATIONS
+> Filters product categories by average price.
 
 ---
 
-### 🔹 1. UNION
+## 🔹 3. **Common Table Expressions (CTEs)**
 
-Combines rows from two queries, removing duplicates.
+Write reusable query logic with `WITH` clause.
 
 ```sql
-SELECT name FROM customers
-UNION
-SELECT name FROM suppliers;
+WITH category_avg AS (
+  SELECT category, AVG(price) AS avg_price
+  FROM products
+  GROUP BY category
+)
+SELECT * FROM category_avg WHERE avg_price > 100;
 ```
 
-> Returns **unique** names from both tables.
+> Same as derived table, but **cleaner and more modular**.
 
 ---
 
-### 🔹 2. UNION ALL
-
-Same as `UNION`, but keeps duplicates.
+### 🧱 You can chain multiple CTEs:
 
 ```sql
-SELECT name FROM customers
-UNION ALL
-SELECT name FROM suppliers;
+WITH top_orders AS (
+  SELECT * FROM orders ORDER BY total DESC LIMIT 10
+),
+order_users AS (
+  SELECT o.*, u.name FROM top_orders o JOIN users u ON u.id = o.user_id
+)
+SELECT * FROM order_users;
 ```
 
 ---
 
-### 🔹 3. INTERSECT
+## 🔁 **Recursive CTEs**
 
-Returns only rows **common to both queries**.
+Model **hierarchies** (e.g., org charts, file systems).
 
 ```sql
-SELECT email FROM customers
-INTERSECT
-SELECT email FROM newsletter_subscribers;
+WITH RECURSIVE manager_tree AS (
+  SELECT id, name, manager_id FROM employees WHERE id = 1
+  UNION ALL
+  SELECT e.id, e.name, e.manager_id
+  FROM employees e
+  JOIN manager_tree mt ON mt.id = e.manager_id
+)
+SELECT * FROM manager_tree;
 ```
 
-> ✅ Who is both a customer and newsletter subscriber
+> Builds tree under employee with `id = 1`.
 
 ---
 
-### 🔹 4. EXCEPT (or MINUS)
+## 🔍 4. **Filtering with IN, EXISTS, NOT EXISTS**
 
-Returns rows from the first query that are **not in the second**.
+### ✅ IN / NOT IN
 
 ```sql
-SELECT email FROM customers
-EXCEPT
-SELECT email FROM newsletter_subscribers;
+SELECT * FROM users
+WHERE id IN (SELECT user_id FROM orders);
 ```
 
-> ✅ Customers who did **not** subscribe
+> Users who have placed orders.
+
+⚠️ `NOT IN` fails if subquery returns `NULL`. Use `NOT EXISTS` instead.
 
 ---
 
-## ⚠️ Common Mistakes
+### ✅ EXISTS / NOT EXISTS (more efficient)
 
-| Mistake                                         | Why it’s wrong                                 |
-| ----------------------------------------------- | ---------------------------------------------- |
-| Forgetting `ON` condition in JOIN               | Cartesian product, massive row count           |
-| Mixing `LEFT JOIN` with `WHERE col IS NOT NULL` | Cancels the left join                          |
-| `UNION` when `UNION ALL` is needed              | Performance hit from unnecessary deduping      |
-| Misusing `INTERSECT/EXCEPT` in MySQL            | Not supported — emulate with `JOIN/NOT EXISTS` |
+```sql
+SELECT * FROM users u
+WHERE EXISTS (
+  SELECT 1 FROM orders o WHERE o.user_id = u.id
+);
+```
+
+> ✅ Efficient for large datasets.
 
 ---
 
 ## ✅ Best Practices
 
-- Prefer `INNER JOIN` unless you explicitly need all rows from one side.
-- Avoid ambiguous column names by using aliases (`u.name`, `o.total`).
-- Always define `ON` clauses clearly and avoid Cartesian joins.
-- Use `UNION ALL` when duplicates are acceptable (it's faster).
+- Use CTEs for **readability and reuse**
+- Use `JOIN`s over correlated subqueries when possible
+- Use `EXISTS` over `IN` for performance
+- Always name derived tables and CTEs clearly
 
 ---
 
-## 🔜 Next Step
+## 🛠 Real-World Use Case
 
-**Step 7: Subqueries, Derived Tables & Common Table Expressions (CTEs)**
+```sql
+WITH recent_orders AS (
+  SELECT * FROM orders WHERE created_at > NOW() - INTERVAL '30 days'
+),
+user_stats AS (
+  SELECT user_id, COUNT(*) AS order_count, SUM(total) AS total_spent
+  FROM recent_orders GROUP BY user_id
+)
+SELECT u.name, us.order_count, us.total_spent
+FROM user_stats us
+JOIN users u ON u.id = us.user_id
+ORDER BY total_spent DESC;
+```
 
-- Writing nested `SELECT` queries
-- Using CTEs (`WITH`) for clarity and reuse
-- Filtering with `EXISTS`, `NOT EXISTS`, `IN`, `NOT IN`
+> Shows top spenders in the last 30 days — clean and powerful with CTEs.
+
+---
+
+## ✅ Up Next?
+
+Would you like to continue to:
+
+**Step 8: Transactions, Isolation Levels, and Concurrency?**
+Covering:
+
+- `BEGIN`, `COMMIT`, `ROLLBACK`
+- Isolation levels (`READ COMMITTED`, `SERIALIZABLE`, etc.)
+- Locking, deadlocks, and performance tips
