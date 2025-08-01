@@ -63,7 +63,7 @@ SELECT * FROM articles
 WHERE document @@ to_tsquery('nestjs & validation');
 ```
 
-### 🔸 Add index for performance:
+### 🔸 Add [index for performance](./step9.md):
 
 ```sql
 CREATE INDEX idx_articles_fts ON articles USING GIN (document);
@@ -118,7 +118,7 @@ WHERE 'ts' = ANY(aliases);
 
 ---
 
-## 🔁 5. **Materialized Views**
+## 🔁 5. [**Materialized Views**](./step11.md)
 
 Materialized views **store** the results of a query (like a cached view) and can be refreshed.
 
@@ -163,7 +163,7 @@ CREATE TABLE employees (
 
 ---
 
-## ⚡️ 8. **Extensions (PostgreSQL)**
+## ⚡️ 8. [**Extensions (PostgreSQL)**](./ExtensionsCheatSheet.md)
 
 Enable features via extensions:
 
@@ -177,20 +177,20 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto;     -- for encryption
 
 ## ❗️Common Pitfalls
 
-| Mistake                                    | Why It’s a Problem                     |
-| ------------------------------------------ | -------------------------------------- |
-| Using plain `JSON` instead of `JSONB`      | Slower queries and lack of indexing    |
-| Forgetting `REFRESH` on materialized views | Data goes stale                        |
-| Overusing full-text search                 | Can bloat indexes and hurt performance |
-| Not indexing JSON/Array columns            | Queries become slow                    |
-| Ignoring nullability in computed columns   | Causes unexpected behavior             |
+| Mistake                                                   | Why It’s a Problem                     |
+| --------------------------------------------------------- | -------------------------------------- |
+| Using plain `JSON` instead of `JSONB`                     | Slower queries and lack of indexing    |
+| Forgetting `REFRESH` on [materialized views](./step11.md) | Data goes stale                        |
+| Overusing full-text search                                | Can bloat indexes and hurt performance |
+| Not [indexing](./step9.md) JSON/Array columns             | Queries become slow                    |
+| Ignoring nullability in computed columns                  | Causes unexpected behavior             |
 
 ---
 
 ## ✅ Best Practices
 
 - Use **`JSONB`** over `JSON` for performance and indexing.
-- Add **GIN indexes** for arrays and full-text search.
+- Add **[GIN indexes](./step9.md)** for arrays and full-text search.
 - Use **CTEs** for large, complex queries and readability.
-- Store expensive analytics in **materialized views** and **refresh periodically**.
+- Store expensive analytics in [**materialized views**](./step11.md) and **refresh periodically**.
 - Limit geospatial usage to where truly needed — it adds complexity.

@@ -1,3 +1,5 @@
+# 🧠 [Database Normalization](./step1.md)
+
 - 1NF (First Normal Form)
 - 2NF (Second Normal Form)
 - 3NF (Third Normal Form)
@@ -34,7 +36,7 @@ Each column should have **atomic (indivisible)** values, and all entries in a co
 
 ### ✅ Fixed (In 1NF):
 
-Split repeating data into **separate rows** or use another table:
+Split repeating data into **separate rows** or [use another table](./step6.md):
 
 ```sql
 Customer Table:
@@ -56,7 +58,7 @@ Phone Table:
 ### ❗Rule:
 
 - Be in **1NF**
-- **No partial dependency**: no non-key column depends on just a **part of a composite primary key**
+- **No partial dependency**: no non-key column depends on just a **part of a [composite primary key](./step2.md)**
 
 > ✅ If your table has a single-column primary key, 2NF is automatically satisfied.
 
@@ -155,3 +157,5 @@ Split into two tables:
 | 3NF         | Transitive dependencies   | Split out dependent non-key data |
 | BCNF        | Candidate key issues      | Redesign relationships           |
 | 4NF         | Multi-valued dependencies | Further decomposition            |
+
+[Back to Database Design](./database-design.md) | [Next: Denormalization](./denormalization.md)

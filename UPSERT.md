@@ -1,11 +1,11 @@
-## 🔸 What is UPSERT?
+## 🔸 [What is UPSERT?](./step3.md)
 
 **UPSERT** = **Insert** + **Update**
 
 It’s used when:
 
 - You want to **insert** a row if it doesn’t exist.
-- But if it **does exist** (based on a constraint like a primary key or unique field), then just **update it instead**.
+- But if it **does exist** (based on a constraint like a [primary key or unique field](./step2.md)), then just **update it instead**.
 
 This avoids the need to check first with `SELECT`, which simplifies code and improves performance in concurrent environments.
 
@@ -40,7 +40,7 @@ DO UPDATE SET name = EXCLUDED.name;
   - `email = 'admin@example.com'`
   - `name = 'Admin'`
 
-- If a user with `id = 1` **already exists**, the `INSERT` causes a **conflict** (probably because `id` is a `PRIMARY KEY`).
+- If a user with `id = 1` **already exists**, the `INSERT` causes a **conflict** (probably because `id` is a [`PRIMARY KEY`](./step2.md)).
 
 - Then, **instead of throwing an error**, PostgreSQL **updates** the `name` field.
 
@@ -65,7 +65,7 @@ It means: “Set the new value of `name` to the one I just tried to insert.”
 You can specify:
 
 - A **column name** (like `ON CONFLICT (email)`)
-- A **unique constraint name** (`ON CONFLICT ON CONSTRAINT constraint_name`)
+- A **[unique constraint name](./step2.md)** (`ON CONFLICT ON CONSTRAINT constraint_name`)
 - Or use `DO NOTHING` if you want to skip updating.
 
 ### ➕ With `DO NOTHING`:
@@ -91,4 +91,4 @@ This will skip the insert if a conflict happens (i.e., it does nothing).
 
 ## 🧠 Final Tip
 
-Always ensure the `ON CONFLICT (...)` matches a unique constraint or primary key; otherwise, PostgreSQL won’t know what counts as a “conflict.”
+Always ensure the `ON CONFLICT (...)` matches a [unique constraint or primary key](./step2.md); otherwise, PostgreSQL won’t know what counts as a “conflict.”

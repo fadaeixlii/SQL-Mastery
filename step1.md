@@ -7,7 +7,7 @@
 **SQL (Structured Query Language)** is a declarative programming language used for:
 
 - **Creating**, **reading**, **updating**, and **deleting** data in a **relational database**.
-- Managing **database schemas**, **access controls**, and **transactions**.
+- Managing **[database schemas](./step2.md)**, **access controls**, and **[transactions](./step8.md)**.
 
 ---
 
@@ -38,7 +38,7 @@ Examples:
 
 #### 2. **Schema**
 
-- A collection of tables, relationships, views, stored procedures, etc.
+- A collection of tables, relationships, [views](./step11.md), [stored procedures](./step10.md), etc.
 - Can be thought of as a **namespace** for your tables.
 
 #### 3. **Primary Key**
@@ -75,13 +75,13 @@ Examples:
 
 - Proposed by Edgar F. Codd in 1970.
 - Organizes data into **relations (tables)**.
-- Operations like `SELECT`, `INSERT`, `UPDATE`, and `DELETE` work on tables.
+- Operations like [`SELECT`](./step4.md), [`INSERT`](./step3.md), [`UPDATE`](./step3.md), and [`DELETE`](./step3.md) work on tables.
 
 ---
 
 ### 🔹 Properties of a Good Relational Design
 
-#### 🔸 1. **Normalization**
+#### 🔸 1. **[Normalization](./Normalization.md)**
 
 Process of reducing redundancy:
 
@@ -90,7 +90,7 @@ Process of reducing redundancy:
 - **3NF** – no transitive dependencies.
 - Often goes up to **BCNF**, **4NF**, etc.
 
-#### 🔸 2. **ACID Properties (Transactions)**
+#### 🔸 2. **ACID Properties ([Transactions](./step8.md))**
 
 Ensures **data integrity**:
 

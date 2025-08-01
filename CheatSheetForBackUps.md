@@ -1,4 +1,4 @@
-## 🛡️ Cheat Sheet: `pg_dump`, `mysqldump`, `pg_restore`, and `EXPLAIN`
+## 🛡️ Cheat Sheet: [`pg_dump`, `mysqldump`, `pg_restore`, and `EXPLAIN`](./step15.md)
 
 ### ✅ PostgreSQL Backup & Restore (via `pg_dump` / `pg_restore`)
 
@@ -36,7 +36,7 @@ mysqldump --no-data -u root -p [dbname] > schema.sql
 mysql -u [user] -p [dbname] < db.sql
 ```
 
-### ✅ Query Analysis: `EXPLAIN / EXPLAIN ANALYZE`
+### ✅ Query Analysis: [`EXPLAIN / EXPLAIN ANALYZE`](./step9.md)
 
 To inspect how your SQL query is executed:
 
@@ -49,7 +49,7 @@ Look for: **Index Scan** vs. **Seq Scan**, cost estimates, actual row counts, la
 
 ---
 
-## ⚙️ Cheat Sheet: Index Management Tips
+## ⚙️ Cheat Sheet: [Index Management Tips](./step9.md)
 
 - `CREATE INDEX idx_name ON table(column);`
 - `CREATE UNIQUE INDEX idx_unique ON table(column);`

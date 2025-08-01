@@ -1,4 +1,4 @@
-## 🔧 NestJS + TypeORM Migrations Setup (PostgreSQL & MySQL)
+## 🔧 [NestJS + TypeORM Migrations Setup (PostgreSQL & MySQL)](./step14.md)
 
 ### ✅ Step 1: Config DataSource
 
@@ -86,14 +86,14 @@ Examples based on NestJS TypeORM guides ([thisdot.co][7])
 
 ## 📋 Summary Table
 
-| Tool / Feature                | Purpose                                 |
-| ----------------------------- | --------------------------------------- |
-| `pg_dump` / `pg_restore`      | Backup & restore Postgres databases     |
-| `mysqldump` / `mysql`         | Backup & restore MySQL databases        |
-| `EXPLAIN` / `EXPLAIN ANALYZE` | Analyze query plans and performance     |
-| Index commands                | To speed up queries and optimize access |
-| TypeORM + NestJS DataSource   | Standardized migration infrastructure   |
-| CLI scripts                   | Generate, run, revert migrations easily |
+| Tool / Feature                                        | Purpose                                 |
+| ----------------------------------------------------- | --------------------------------------- |
+| [`pg_dump` / `pg_restore`](./CheatSheetForBackUps.md) | Backup & restore Postgres databases     |
+| `mysqldump` / `mysql`                                 | Backup & restore MySQL databases        |
+| [`EXPLAIN` / `EXPLAIN ANALYZE`](./step9.md)           | Analyze query plans and performance     |
+| [Index commands](./step9.md)                          | To speed up queries and optimize access |
+| TypeORM + NestJS DataSource                           | Standardized migration infrastructure   |
+| CLI scripts                                           | Generate, run, revert migrations easily |
 
 [3]: https://jeewantha-abayakoon.medium.com/mysqldump-cheat-sheet-5cba8ca47927?utm_source=chatgpt.com "mysqldump Cheat Sheet - Jeewantha Abayakoon (jee1tha)"
 [4]: https://xtendo.org/cheatsheet?utm_source=chatgpt.com "Cheat Sheet - xtendo.org"

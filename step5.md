@@ -140,7 +140,7 @@ ORDER BY signup_date;
 
 ## 🔜 Next Step
 
-**Step 6: Joins and Set Operations**
+[**Step 6: Joins and Set Operations**](./step6.md)
 
 - `INNER`, `LEFT`, `RIGHT`, `FULL OUTER` joins
 - Self joins

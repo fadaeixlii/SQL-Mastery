@@ -8,9 +8,9 @@
 
 - Tables
 - Columns
-- Indexes
+- [Indexes](./step9.md)
 - Constraints
-- Views
+- [Views](./step11.md)
 - Schemas
 - Databases
 
@@ -88,7 +88,7 @@ Deletes the table **and all its data** permanently:
 DROP TABLE users;
 ```
 
-> ⚠️ Use with caution — no rollback without backups.
+> ⚠️ Use with caution — no rollback without [backups](./CheatSheetForBackUps.md).
 
 ---
 

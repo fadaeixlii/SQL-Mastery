@@ -161,7 +161,7 @@ COMMIT;
 
 Shall we move to:
 
-### **Step 9: Indexes, Performance & Optimization**
+### [**Step 9: Indexes, Performance & Optimization**](./step9.md)
 
 Covering:
 

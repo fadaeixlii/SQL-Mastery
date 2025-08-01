@@ -42,7 +42,7 @@ Views **can be updatable** under certain conditions:
 - Based on a single table
 - No aggregates, `DISTINCT`, `GROUP BY`, etc.
 
-You can also define **INSTEAD OF** triggers to make non-updatable views writable.
+You can also define **INSTEAD OF** [triggers](./step10.md) to make non-updatable views writable.
 
 ---
 
@@ -94,13 +94,13 @@ REFRESH MATERIALIZED VIEW CONCURRENTLY monthly_sales;
 
 ## 🔷 4. Key Differences
 
-| Feature           | View                   | Materialized View             |
-| ----------------- | ---------------------- | ----------------------------- |
-| Stores data       | ❌ No                  | ✅ Yes                        |
-| Always up-to-date | ✅ Yes (on each query) | ❌ No (must manually refresh) |
-| Fast queries      | ❌ Depends on query    | ✅ Very fast                  |
-| Supports indexes  | ❌ No                  | ✅ Yes                        |
-| Writable?         | ⚠️ Sometimes           | ❌ No                         |
+| Feature                        | View                   | Materialized View             |
+| ------------------------------ | ---------------------- | ----------------------------- |
+| Stores data                    | ❌ No                  | ✅ Yes                        |
+| Always up-to-date              | ✅ Yes (on each query) | ❌ No (must manually refresh) |
+| Fast queries                   | ❌ Depends on query    | ✅ Very fast                  |
+| Supports [indexes](./step9.md) | ❌ No                  | ✅ Yes                        |
+| Writable?                      | ⚠️ Sometimes           | ❌ No                         |
 
 ---
 
@@ -174,4 +174,4 @@ They are crucial tools in designing **clean**, **performant**, and **secure** da
 
 ---
 
-✅ Ready for Step 12: **Security & Permissions**?
+✅ Ready for Step 12: [**Security & Permissions**](./step12.md)?

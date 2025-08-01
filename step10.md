@@ -162,10 +162,10 @@ EXECUTE FUNCTION log_user_update();
 ## 🔷 9. Best Practices
 
 ✅ **Keep logic simple** – not everything belongs in the DB
-✅ **Wrap in transactions** where needed
+✅ **Wrap in [transactions](./step8.md)** where needed
 ✅ **Use triggers cautiously** – can be hard to debug
 ✅ **Avoid side effects** in functions
-✅ **Version** your procedures/functions via migration tools
+✅ **Version** your procedures/functions via [migration tools](./MigrationSetup.md)
 
 ---
 
@@ -197,4 +197,4 @@ EXECUTE FUNCTION log_user_update();
 
 ---
 
-✅ **Ready for Step 11: Views & Materialized Views**
+✅ **Ready for [Step 11: Views & Materialized Views](./step11.md)**

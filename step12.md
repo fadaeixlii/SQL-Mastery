@@ -54,7 +54,7 @@ GRANT EXECUTE ON FUNCTION update_inventory() TO manager_role;
 
 ### ✅ 3. View-based Security
 
-Use **views** to expose only certain columns or filtered rows:
+Use **[views](./step11.md)** to expose only certain columns or filtered rows:
 
 ```sql
 CREATE VIEW public_users AS
@@ -104,7 +104,7 @@ SET app.current_user_id = 42;
   SET ssn = encrypt('123‑45‑6789'::text, gen_salt('bf'));
   ```
 
-- **Audit logs**: Track changes using extensions like `pgaudit` or custom triggers.
+- **Audit logs**: Track changes using extensions like `pgaudit` or custom [triggers](./step10.md).
 
 ---
 
@@ -124,7 +124,7 @@ SET app.current_user_id = 42;
 
 1. Use **principle of least privilege**: only grant what’s needed.
 2. Use **roles** rather than assigning per user.
-3. Use **views and schemas** to abstract real tables.
+3. Use **[views](./step11.md) and schemas** to abstract real tables.
 4. Leverage **row-level security** for fine-grained filtering.
 5. Enable **encrypted connections**.
 6. **Rotate secrets** (`passwords`, `keys`) regularly.
@@ -143,4 +143,4 @@ SET app.current_user_id = 42;
 
 ---
 
-✅ Ready for **Step 13: SQL Extensions & Advanced Features** (e.g. JSONB, full-text search, geospatial)?
+✅ Ready for [**Step 13: SQL Extensions & Advanced Features**](./step13.md) (e.g. JSONB, full-text search, geospatial)?

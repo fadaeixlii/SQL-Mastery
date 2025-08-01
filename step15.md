@@ -4,7 +4,7 @@ This step focuses on **how to maintain, protect, and operate a production-grade 
 
 ---
 
-## 🧰 1. Backup & Restore Strategies
+## 🧰 1. [Backup & Restore Strategies](./CheatSheetForBackUps.md)
 
 Backups are critical for disaster recovery.
 
@@ -32,7 +32,7 @@ pg_restore -U user -d newdb backup_file.dump
 
 ---
 
-## 🧬 2. Migrations and Version Control
+## 🧬 2. [Migrations and Version Control](./MigrationSetup.md)
 
 Migrations ensure your schema evolves with your codebase.
 
@@ -70,7 +70,7 @@ export class AddUserTable implements MigrationInterface {
 
 ---
 
-## 📈 3. Performance Monitoring
+## 📈 3. [Performance Monitoring](./step9.md)
 
 ### 🔍 Key Metrics
 
@@ -109,7 +109,7 @@ EXPLAIN ANALYZE SELECT * FROM users WHERE email = 'john@example.com';
 
 ---
 
-## 🔒 5. Security Best Practices
+## 🔒 5. [Security Best Practices](./step12.md)
 
 | Area            | Tips                                    |
 | --------------- | --------------------------------------- |
@@ -137,7 +137,7 @@ In production environments:
 | Task                              | Frequency      | Notes                         |
 | --------------------------------- | -------------- | ----------------------------- |
 | Vacuuming / Autovacuum (Postgres) | Regular        | Avoids bloat                  |
-| Reindexing                        | Weekly/Monthly | Keeps index efficient         |
+| [Reindexing](./step9.md)          | Weekly/Monthly | Keeps index efficient         |
 | Analyze Tables                    | Regular        | Updates query planner stats   |
 | Monitoring logs                   | Daily          | For anomalies or slow queries |
 
@@ -146,8 +146,8 @@ In production environments:
 ## ✅ Summary: Your DBA Starter Pack
 
 - 🔁 Use automated backups (with verification!)
-- 🧬 Track schema changes via migrations
-- 🕵️‍♂️ Monitor slow queries and indexes
-- 🔒 Enforce tight permissions and connection rules
+- 🧬 Track schema changes via [migrations](./MigrationSetup.md)
+- 🕵️‍♂️ Monitor [slow queries and indexes](./step9.md)
+- 🔒 Enforce tight [permissions](./step12.md) and connection rules
 - 🚦 Plan for scaling via read replicas or sharding
 - ⚙️ Keep DB changes safe with deployment hygiene

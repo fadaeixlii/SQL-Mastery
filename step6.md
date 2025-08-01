@@ -1,6 +1,6 @@
 # 🧩 **STEP 6: JOINs and SET Operations**
 
-Understanding JOINs is essential for working with **normalized databases**. You’ll use joins anytime you work with multiple related tables.
+Understanding JOINs is essential for working with **[normalized databases](./Normalization.md)**. You’ll use joins anytime you work with multiple related tables.
 
 ---
 
@@ -212,7 +212,7 @@ SELECT email FROM newsletter_subscribers;
 
 ## 🔜 Next Step
 
-**Step 7: Subqueries, Derived Tables & Common Table Expressions (CTEs)**
+[**Step 7: Subqueries, Derived Tables & Common Table Expressions (CTEs)**](./step7.md)
 
 - Writing nested `SELECT` queries
 - Using CTEs (`WITH`) for clarity and reuse

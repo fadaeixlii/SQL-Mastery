@@ -6,12 +6,12 @@
 
 **DML (Data Manipulation Language)** is used to **interact with data** stored in database tables.
 
-| Command  | Purpose                          |
-| -------- | -------------------------------- |
-| `INSERT` | Add new records                  |
-| `UPDATE` | Modify existing records          |
-| `DELETE` | Remove records                   |
-| `SELECT` | Read records (covered in Step 4) |
+| Command  | Purpose                                        |
+| -------- | ---------------------------------------------- |
+| `INSERT` | Add new records                                |
+| `UPDATE` | Modify existing records                        |
+| `DELETE` | Remove records                                 |
+| `SELECT` | Read records (covered in [Step 4](./step4.md)) |
 
 ---
 
@@ -120,7 +120,7 @@ DELETE FROM users;
 
 ---
 
-## 🔸 4. UPSERT (Insert or Update)
+## 🔸 4. [UPSERT (Insert or Update)](./UPSERT.md)
 
 > Used to insert if record doesn’t exist, otherwise update it.
 
@@ -147,29 +147,29 @@ ON DUPLICATE KEY UPDATE name = 'Admin';
 
 ## 🔸 5. Bulk Insert / Update / Delete Tips
 
-| Tip                                        | Benefit                  |
-| ------------------------------------------ | ------------------------ |
-| Use transactions for multiple operations   | Prevent partial failures |
-| Index columns used in `WHERE`              | Faster updates/deletes   |
-| Use `RETURNING` for audit logs or ID reuse | Avoid extra select calls |
+| Tip                                                      | Benefit                  |
+| -------------------------------------------------------- | ------------------------ |
+| Use [`transactions`](./step8.md) for multiple operations | Prevent partial failures |
+| [Index](./step9.md) columns used in `WHERE`              | Faster updates/deletes   |
+| Use `RETURNING` for audit logs or ID reuse               | Avoid extra select calls |
 
 ---
 
 ## ⚠️ Common DML Mistakes
 
-| Mistake                                 | Why it's risky                          |
-| --------------------------------------- | --------------------------------------- |
-| Forgetting `WHERE` in `UPDATE`/`DELETE` | Affects all rows                        |
-| No `RETURNING` when needing new IDs     | Requires another query                  |
-| No `transaction` in multi-step ops      | Leaves DB in inconsistent state         |
-| Blind trust on app-level validation     | Data integrity should be DB-guarded too |
+| Mistake                                          | Why it's risky                          |
+| ------------------------------------------------ | --------------------------------------- |
+| Forgetting `WHERE` in `UPDATE`/`DELETE`          | Affects all rows                        |
+| No `RETURNING` when needing new IDs              | Requires another query                  |
+| No [`transaction`](./step8.md) in multi-step ops | Leaves DB in inconsistent state         |
+| Blind trust on app-level validation              | Data integrity should be DB-guarded too |
 
 ---
 
 ## ✅ Best Practices
 
 - Always use **parameterized queries** or ORM to avoid SQL injection.
-- Wrap critical updates/deletes in **transactions**.
+- Wrap critical updates/deletes in **[transactions](./step8.md)**.
 - Log or archive data before **deleting** (soft deletes are safer).
 - Validate inputs at the DB layer (e.g., via `CHECK`, `NOT NULL`).
 

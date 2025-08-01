@@ -24,13 +24,13 @@ An **ORM (Object-Relational Mapper)** is a library that lets you **interact with
 
 ## 🧱 Common ORM Concepts
 
-| Concept             | Explanation                       |
-| ------------------- | --------------------------------- |
-| **Entities/Models** | Classes that map to DB tables     |
-| **Repositories**    | Handle DB operations for a model  |
-| **Migrations**      | Version-controlled schema changes |
-| **Relations**       | One-to-many, many-to-many, etc.   |
-| **Query Builders**  | Programmatic SQL construction     |
+| Concept                               | Explanation                       |
+| ------------------------------------- | --------------------------------- |
+| **Entities/Models**                   | Classes that map to DB tables     |
+| **Repositories**                      | Handle DB operations for a model  |
+| **[Migrations](./MigrationSetup.md)** | Version-controlled schema changes |
+| **Relations**                         | One-to-many, many-to-many, etc.   |
+| **Query Builders**                    | Programmatic SQL construction     |
 
 ---
 
@@ -127,13 +127,13 @@ async createUser(@Body() dto: CreateUserDto) {
 
 ## 🛡️ Best Practices
 
-| Practice                          | Why it matters                   |
-| --------------------------------- | -------------------------------- |
-| Use **parameterized queries**     | Prevents SQL injection           |
-| Use **migrations**                | Track schema changes             |
-| Prefer **ORM for simple CRUD**    | Fast development, clean code     |
-| Use **query builders or raw SQL** | For complex or optimized queries |
-| Log & analyze **slow queries**    | Optimize performance             |
+| Practice                                     | Why it matters                   |
+| -------------------------------------------- | -------------------------------- |
+| Use **parameterized queries**                | Prevents SQL injection           |
+| Use **migrations**                           | Track schema changes             |
+| Prefer **ORM for simple CRUD**               | Fast development, clean code     |
+| Use **query builders or raw SQL**            | For complex or optimized queries |
+| Log & analyze **[slow queries](./step9.md)** | Optimize performance             |
 
 ---
 
@@ -141,5 +141,5 @@ async createUser(@Body() dto: CreateUserDto) {
 
 - **Admin Panel:** ORM-based CRUD using relationships
 - **Reports Dashboard:** Raw SQL for optimized JOIN + GROUP BY
-- **Analytics:** Use CTEs and window functions directly with query builders
+- **Analytics:** Use [CTEs](./step13.md) and window functions directly with query builders
 - **Filtering APIs:** Prisma + DTOs with dynamic `where` clauses

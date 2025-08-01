@@ -186,7 +186,7 @@ FROM users;
 
 ## 🔜 Next Step
 
-**Step 5: Advanced `SELECT` Clauses**
+[**Step 5: Advanced `SELECT` Clauses**](./step5.md)
 
 - Aggregation: `COUNT`, `SUM`, `AVG`, `MIN`, `MAX`
 - `GROUP BY`, `HAVING`

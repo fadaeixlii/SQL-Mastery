@@ -76,6 +76,15 @@ CREATE INDEX idx_lower_email ON users(LOWER(email));
 CREATE FULLTEXT INDEX ft_idx ON articles(content);
 ```
 
+### ✅ [Full-Text Index](./ExtensionsCheatSheet.md)
+
+- For searching human-readable content
+
+```sql
+-- MySQL
+CREATE FULLTEXT INDEX ft_idx ON articles(content);
+```
+
 ---
 
 ## 🔷 3. When Indexes Help
@@ -104,7 +113,7 @@ CREATE FULLTEXT INDEX ft_idx ON articles(content);
 
 ## 🔷 5. Analyzing Performance
 
-### 🔍 EXPLAIN / EXPLAIN ANALYZE
+### 🔍 [EXPLAIN](./CheatSheetForBackUps.md) / EXPLAIN ANALYZE
 
 ```sql
 EXPLAIN SELECT * FROM users WHERE email = 'x@example.com';
@@ -149,7 +158,7 @@ WHERE email = 'x@example.com' OR email = 'X@example.com'
 
 ✅ Use LIMIT/OFFSET or keyset pagination
 
-✅ Denormalize cautiously for performance
+✅ [Denormalize](./Normalization.md) cautiously for performance
 
 ---
 
@@ -228,7 +237,7 @@ SELECT * FROM users WHERE created_at < '2024-07-01' ORDER BY created_at DESC LIM
 
 ---
 
-## 🚀 Next Step: Step 10 — Stored Procedures, Functions & Triggers
+## 🚀 Next Step: [Step 10 — Stored Procedures, Functions & Triggers](./step10.md)
 
 This covers:
 

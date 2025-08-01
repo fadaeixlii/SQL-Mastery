@@ -1,8 +1,8 @@
-# 📄 SQL Extensions Cheat Sheet: JSON, Full-Text Search (FTS), and PostGIS
+# 📄 [SQL Extensions Cheat Sheet: JSON, Full-Text Search (FTS), and PostGIS](./step13.md)
 
 ---
 
-## 📦 JSON / JSONB (PostgreSQL)
+## 📦 [JSON / JSONB (PostgreSQL)](./step13.md)
 
 ### ✅ Operators
 
@@ -36,7 +36,7 @@
 
 ---
 
-## 🔎 Full-Text Search (FTS)
+## 🔎 [Full-Text Search (FTS)](./step13.md)
 
 ### ✅ Key Concepts
 
@@ -67,7 +67,7 @@ WHERE to_tsvector('english', title || ' ' || content)
       @@ to_tsquery('nestjs & validation');
 ```
 
-### 🔍 Indexing for FTS
+### 🔍 [Indexing for FTS](./step9.md)
 
 ```sql
 CREATE INDEX idx_posts_fts
@@ -76,7 +76,7 @@ ON posts USING GIN(to_tsvector('english', title || ' ' || content));
 
 ---
 
-## 🗺️ PostGIS (Geospatial)
+## 🗺️ [PostGIS (Geospatial)](./step13.md)
 
 ### ✅ Spatial Types
 
@@ -116,7 +116,7 @@ WHERE ST_DWithin(
 );
 ```
 
-### 🧱 Indexing
+### 🧱 [Indexing](./step9.md)
 
 ```sql
 CREATE INDEX idx_store_location ON stores USING GIST(location);

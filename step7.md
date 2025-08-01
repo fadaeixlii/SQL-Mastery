@@ -204,7 +204,7 @@ ORDER BY total_spent DESC;
 
 Would you like to continue to:
 
-**Step 8: Transactions, Isolation Levels, and Concurrency?**
+[**Step 8: Transactions, Isolation Levels, and Concurrency?**](./step8.md)
 Covering:
 
 - `BEGIN`, `COMMIT`, `ROLLBACK`
